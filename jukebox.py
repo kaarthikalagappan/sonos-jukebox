@@ -57,6 +57,7 @@ while is_running:
         elif command.lower() == "1":
             instructions = splitted[1]
             instructions = instructions.strip()
+
             if instructions == "togglenightmode":
                 state = makeRequest("state/")
                 if state["nightMode"] == "false":
@@ -69,6 +70,7 @@ while is_running:
                     sayText("Current state cannot be read")
                     print("Current state cannot be read")
                     logInformation("Retrieving current state failed")
+            
             elif instructions == "togglespeechmode":
                 state = makeRequest("state/")
                 if not state["equalizer"]["speechEnhancement"]:
@@ -80,8 +82,10 @@ while is_running:
                 else:
                     print("Current state cannot be read")
                     logInformation("Retrieving current state failed")
+
             elif instructions == "playpause" or instructions == "togglemute":
                 makeRequest("playpause/")
+
             elif instructions == "shuffle":
                 state = makeRequest("state/")
                 if not state["playMode"]["shuffle"]:
@@ -92,6 +96,7 @@ while is_running:
                     sayText("Turning OFF Shuffle")
                     logInformation("Turning OFF Shuffle")
                     makeRequest("shuffle/off")
+                    
             else:
                 sayText(str(instructions))
                 print(base_url + str(instructions))
